@@ -17,7 +17,6 @@ val Customer.orderedProducts: Set<Product> get() {
 val Shop.allOrderedProducts: Set<Product> get() {
     // Return all products that were ordered by at least one customer
     return this.customers
-            .flatMap { it.orders }
-            .flatMap { it.products }
+            .flatMap { it.orderedProducts }
             .toSet()
 }
