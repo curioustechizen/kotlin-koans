@@ -33,5 +33,10 @@ class MyDateIterator(val dateRange: DateRange) : Iterator<MyDate> {
         current = current.addTimeIntervals(TimeInterval.DAY, 1)
         return next
     }
-
 }
+
+infix operator fun MyDate.plus(interval: MultipliedInterval): MyDate = addTimeIntervals(interval.timeInterval, interval.multiplier)
+infix operator fun MyDate.plus(interval: TimeInterval): MyDate = addTimeIntervals(interval, 1)
+
+data class MultipliedInterval(val timeInterval: TimeInterval, val multiplier: Int)
+infix operator fun TimeInterval.times(count: Int): MultipliedInterval = MultipliedInterval(this, count)
